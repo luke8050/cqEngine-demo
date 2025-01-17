@@ -1,0 +1,54 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.ehcache.org/v3"
+        xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
+
+    <!-- 默认缓存配置 -->
+    <cache alias="defaultCache">
+        <key-type>java.lang.String</key-type>
+        <value-type>java.lang.String</value-type>
+        <expiry>
+            <ttl unit="seconds">3600</ttl> <!-- TTL: 60秒 -->
+        </expiry>
+        <heap unit="entries">1000</heap> <!-- 最大缓存100条记录 -->
+    </cache>
+
+    <!-- 用户缓存配置 -->
+    <cache alias="nodeCache">
+        <key-type>java.lang.String</key-type>
+        <value-type>com.luke.demo.entity.Node</value-type>
+        <expiry>
+<!--            <ttl unit="seconds">3600</ttl>-->
+            <ttl unit="minutes">10</ttl> <!-- TTL: 10分钟 -->
+        </expiry>
+        <!-- 缓存监听器配置，有标签顺序要求(创建cache时就会配置listener) -->
+        <!--<listeners>
+            <listener>
+                <class>com.luke.demo.listener.MyCacheEventListener</class>
+                &lt;!&ndash; 事件触发模式：同步或异步 &ndash;&gt;
+                <event-firing-mode>ASYNCHRONOUS</event-firing-mode>
+                &lt;!&ndash; 事件排序模式：有序或无序 &ndash;&gt;
+                <event-ordering-mode>UNORDERED</event-ordering-mode>
+                &lt;!&ndash; 监听的事件类型 &ndash;&gt;
+                <events-to-fire-on>CREATED</events-to-fire-on>
+                <events-to-fire-on>UPDATED</events-to-fire-on>
+                <events-to-fire-on>EXPIRED</events-to-fire-on>
+                <events-to-fire-on>REMOVED</events-to-fire-on>
+                <events-to-fire-on>EVICTED</events-to-fire-on>
+            </listener>
+        </listeners>-->
+        <resources>
+            <heap unit="entries">200</heap><!-- 最大缓存200条记录 -->
+        </resources>
+    </cache>
+
+    <cache alias="ruleCache">
+        <key-type>com.luke.demo.entity.RuleKey</key-type>
+        <value-type>com.luke.demo.entity.Rule</value-type>
+        <expiry>
+            <ttl unit="seconds">3600</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">1000</heap>
+        </resources>
+    </cache>
+</config>
