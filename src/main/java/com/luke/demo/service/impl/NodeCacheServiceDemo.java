@@ -17,11 +17,11 @@ import java.util.EnumSet;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: NodeRepository结合ehcache使用
  * @author: lulu
  * @Date: 2025/1/14 23:50
  **/
-@Service
+//@Service
 public class NodeCacheServiceDemo {
 
     @Autowired

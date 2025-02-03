@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author: lulu
  * @Date: 2025/1/14 23:49
  **/
-public interface RuleRepository extends JpaRepository<Rule, Long> {
+public interface RuleRepository extends JpaRepository<Rule, String> {
     Rule findByRuleId(String ruleId);
 }

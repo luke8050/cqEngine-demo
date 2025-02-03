@@ -1,5 +1,8 @@
 package com.luke.demo.entity;
 
+import com.luke.demo.constant.RuleType;
+import com.luke.demo.indexCache.CacheKey;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,7 +13,7 @@ import java.time.LocalDateTime;
  **/
 @Entity
 @Table(name = "rules")
-public class Rule {
+public class Rule implements CacheKey<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,9 +89,10 @@ public class Rule {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String getCacheKey() {
+        return ruleId + ":" + versionId;
+    }
 }
 
-// 枚举类型
-enum RuleType {
-    typeA, typeB, typeC
-}

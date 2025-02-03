@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.luke.demo.entity.Node;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * @Description:
+ * @Description: NodeRepository使用
  * @author: lulu
  * @Date: 2025/1/14 23:50
  **/
@@ -44,5 +45,10 @@ public class NodeServiceDemo {
             // 如果不存在，插入新数据
             return nodeRepository.save(node);
         }
+    }
+
+    @Transactional
+    public void deleteNode(String nodeId) {
+        nodeRepository.deleteByNodeId(nodeId); // 删除数据库记录
     }
 }

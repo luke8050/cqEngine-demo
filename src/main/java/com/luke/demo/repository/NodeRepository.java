@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @Date: 2025/1/14 23:48
  **/
 @Repository
-public interface NodeRepository extends JpaRepository<Node, Long> {
+public interface NodeRepository extends JpaRepository<Node, String> {
     Node findByNodeId(String nodeId);
 
     void deleteByNodeId(String nodeId);

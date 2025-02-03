@@ -43,7 +43,7 @@
 
     <cache alias="ruleCache">
         <key-type>com.luke.demo.entity.RuleKey</key-type>
-        <value-type>com.luke.demo.entity.Rule</value-type>
+        <!--<value-type>com.luke.demo.entity.Rule</value-type>-->
         <expiry>
             <ttl unit="seconds">3600</ttl>
         </expiry>

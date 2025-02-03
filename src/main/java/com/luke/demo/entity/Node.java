@@ -1,5 +1,9 @@
 package com.luke.demo.entity;
 
+import com.luke.demo.constant.NodeType;
+import com.luke.demo.indexCache.CacheKey;
+import com.luke.demo.indexCache.MergeEntity;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -10,7 +14,7 @@ import java.time.LocalDateTime;
  **/
 @Entity
 @Table(name = "node")
-public class Node {
+public class Node implements CacheKey<String>, MergeEntity<Node> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,9 +90,33 @@ public class Node {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String getCacheKey() {
+        return nodeId;
+    }
+
+    @Override
+    public Node merge(Node node) {
+        if (node != null) {
+            this.name = node.getName();
+            this.nodeType = node.getNodeType();
+            this.accountId = node.getAccountId();
+            this.createdAt = node.getCreatedAt();
+        }
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "id=" + id +
+                ", nodeId='" + nodeId + '\'' +
+                ", name='" + name + '\'' +
+                ", nodeType=" + nodeType +
+                ", accountId=" + accountId +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
 
-// 枚举类型
-enum NodeType {
-    type1, type2, type3
-}
